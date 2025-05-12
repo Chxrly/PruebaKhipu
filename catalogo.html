@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mt-4 mb-4">Catálogo</h2>
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center">
+                <img src="{{ url_for('static', filename='content/' ~ producto.imagen) }}" class="card-img-top" alt="{{ producto.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text"><strong>${{ "{:,}".format(producto.precio) }}</strong></p>
+                    <a href="{{ url_for('agregar', producto_id=producto.id) }}" class="btn btn-outline-primary">Agregar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('carrito') }}" class="btn btn-success">Ir al carrito</a>
+    </div>
+</div>
+{% endblock %}

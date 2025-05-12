@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Carrito de Compras</h2>
+
+    <form action="{{ url_for('actualizar_carrito') }}" method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pid, item in resumen.items() %}
+                <tr>
+                    <td>
+                        <img src="{{ url_for('static', filename='content/' + item.producto.imagen) }}" alt="{{ item.producto.nombre }}" width="60">
+                        {{ item.producto.nombre }}
+                    </td>
+                    <td>
+                        <input type="hidden" name="producto_id" value="{{ pid }}">
+                        <input type="number" name="cantidad" min="1" value="{{ item.cantidad }}" class="form-control" style="width: 80px;">
+                    </td>
+                    <td>${{ item.producto.precio * item.cantidad }}</td>
+                    <td>
+                        <a href="{{ url_for('eliminar', producto_id=pid) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-end mb-3">
+            <strong>Total: ${{ total }}</strong>
+        </div>
+
+        <div class="text-start">
+            <button type="submit" class="btn btn-secondary">Actualizar Cantidades</button>
+        </div>
+    </form>
+
+    <div class="text-end mt-3">
+        <form action="{{ url_for('pagar') }}" method="post">
+            <input type="hidden" name="total" value="{{ total }}">
+            <button type="submit" class="btn btn-primary">Pagar con Khipu</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
