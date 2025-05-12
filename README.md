@@ -14,6 +14,6 @@ Funcionalidades principales
 
 Estructura del código
 
-- `app.py`: aplicación principal Flask con rutas para catálogo, carrito y pago
-- `templates/`: incluye `catalogo.html`, `carrito.html`, y `layout.html` usando Jinja2
-- `static/`: contiene imágenes de productos y estilos
+- app.py: aplicación principal Flask con rutas para catálogo, carrito y pago
+- catalogo.html, carrito.html, y layout.html usando Jinja2
+- contiene imágenes de productos y estilos
